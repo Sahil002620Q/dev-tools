@@ -224,6 +224,54 @@
     "popularity": "high"
   },
   {
+    "name": "C# (.NET SDK)",
+    "url": "https://dotnet.microsoft.com",
+    "desc": "Microsoft .NET SDK — build, run, and publish C# apps from the CLI",
+    "cat": "languages",
+    "type": "ide",
+    "commands": {
+      "win": "winget install Microsoft.DotNet.SDK.8 && [Environment]::SetEnvironmentVariable('Path', [Environment]::GetEnvironmentVariable('Path', 'User') + ';C:\\Program Files\\dotnet', 'User')",
+      "mac": "brew install dotnet && echo 'export DOTNET_ROOT=\"/usr/local/share/dotnet\" && export PATH=$PATH:/usr/local/share/dotnet' >> ~/.zshrc && source ~/.zshrc",
+      "linux_apt": "wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O /tmp/ms-prod.deb && sudo dpkg -i /tmp/ms-prod.deb && sudo apt update && sudo apt install -y dotnet-sdk-8.0",
+      "linux_pacman": "sudo pacman -S --noconfirm dotnet-sdk",
+      "linux_dnf": "sudo dnf install -y dotnet-sdk-8.0"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "PHP",
+    "url": "https://php.net",
+    "desc": "Server-side scripting language with CLI interpreter and Composer package manager",
+    "cat": "languages",
+    "type": "ide",
+    "commands": {
+      "win": "winget install PHP.PHP && [Environment]::SetEnvironmentVariable('Path', [Environment]::GetEnvironmentVariable('Path', 'User') + ';C:\\php', 'User')",
+      "mac": "brew install php && echo 'export PATH=\"/usr/local/opt/php/bin:$PATH\"' >> ~/.zshrc && source ~/.zshrc",
+      "linux_apt": "sudo apt update && sudo apt install -y php php-cli php-mbstring php-xml",
+      "linux_pacman": "sudo pacman -S --noconfirm php",
+      "linux_dnf": "sudo dnf install -y php php-cli php-mbstring php-xml"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Ruby",
+    "url": "https://ruby-lang.org",
+    "desc": "Dynamic, open source language focused on simplicity and productivity",
+    "cat": "languages",
+    "type": "ide",
+    "commands": {
+      "win": "winget install RubyInstallerTeam.RubyWithDevKit.3.2 && [Environment]::SetEnvironmentVariable('Path', [Environment]::GetEnvironmentVariable('Path', 'User') + ';C:\\Ruby32-x64\\bin', 'User')",
+      "mac": "brew install ruby && echo 'export PATH=\"/usr/local/opt/ruby/bin:$(brew --prefix ruby)/lib/ruby/gems/3.2.0/bin:$PATH\"' >> ~/.zshrc && source ~/.zshrc",
+      "linux_apt": "sudo apt update && sudo apt install -y ruby-full && echo 'export GEM_HOME=$HOME/gems && export PATH=$HOME/gems/bin:$PATH' >> ~/.bashrc && source ~/.bashrc",
+      "linux_pacman": "sudo pacman -S --noconfirm ruby",
+      "linux_dnf": "sudo dnf install -y ruby ruby-devel"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
     "name": "Antigravity",
     "url": "https://antigravity.dev",
     "desc": "High-performance IDE command utility",

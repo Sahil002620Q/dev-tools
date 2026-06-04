@@ -1,4 +1,4 @@
-const CACHE_NAME = 'devhub-v7';
+const CACHE_NAME = 'devhub-v8';
 const ASSETS = [
     './',
     './index.html',

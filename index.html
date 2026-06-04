@@ -1135,7 +1135,7 @@
             position: relative;
             z-index: 2;
             color: var(--muted);
-            opacity: 0.85;
+            opacity: 1;
             pointer-events: auto;
             transform: scale(1);
         }
@@ -1204,7 +1204,7 @@
             border: 1.5px solid var(--glass-border);
             background: var(--glass);
             color: var(--text);
-            font-family: 'Inter', sans-serif;
+            font-family: 'DM Sans', sans-serif;
             font-size: 0.83rem;
             outline: none;
             transition: border-color .2s, box-shadow .2s;
@@ -1260,7 +1260,7 @@
             border: 1.5px dashed var(--glass-border);
             background: var(--glass);
             color: var(--accent);
-            font-family: 'Inter', sans-serif;
+            font-family: 'DM Sans', sans-serif;
             font-size: 0.78rem;
             font-weight: 500;
             cursor: pointer;
@@ -1388,7 +1388,7 @@
             background: var(--accent);
             color: #fff;
             border: none;
-            font-family: 'Inter', sans-serif;
+            font-family: 'DM Sans', sans-serif;
             font-size: 0.84rem;
             font-weight: 600;
             cursor: pointer;
@@ -2034,6 +2034,67 @@
                 display: flex;
             }
         }
+
+        /* ── TIER BADGE ON CARD ── */
+        .card-tier-badge {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.52rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            padding: 2px 6px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            opacity: 0.85;
+            transition: opacity .2s;
+            flex-shrink: 0;
+        }
+        .card:hover .card-tier-badge { opacity: 1; }
+        .tier-open-source { background: rgba(139,92,246,0.12); color: #8b5cf6; }
+        .tier-free        { background: rgba(16,185,129,0.12); color: #10b981; }
+        .tier-freemium    { background: rgba(61,126,255,0.12); color: #3d7eff; }
+        .tier-paid        { background: rgba(236,72,153,0.12); color: #ec4899; }
+
+        /* ── SORT DROPDOWN ── */
+        .sort-select {
+            padding: 4px 8px;
+            border-radius: 8px;
+            border: 1.5px solid var(--glass-border);
+            background: var(--glass);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text2);
+            outline: none;
+            cursor: pointer;
+            transition: background .3s, border-color .2s, color .3s;
+        }
+        .sort-select:hover { border-color: var(--accent); color: var(--text); }
+
+        /* ── TOAST ── */
+        .toast {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--glass-card);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1.5px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            z-index: 500;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .25s, transform .3s cubic-bezier(.34,1.3,.64,1);
+            white-space: nowrap;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
     </style>
 </head>
 
@@ -2121,6 +2182,13 @@
 
         <div class="meta-row">
             <div class="meta" id="meta">Loading...</div>
+            <select class="sort-select" id="sort-sel" title="Sort tools">
+                <option value="smart">Smart Sort</option>
+                <option value="az">A → Z</option>
+                <option value="za">Z → A</option>
+                <option value="popularity">By Popularity</option>
+                <option value="tier">By Tier</option>
+            </select>
         </div>
 
         <div class="grid" id="grid">
@@ -2345,6 +2413,16 @@
                     Add Custom Tool
                 </button>
             </div>
+            <div class="sp-action-row" style="padding-top:0;">
+                <button class="sp-action-btn" id="export-favs-btn" style="color:var(--accent);border-style:dashed;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Export Favourites
+                </button>
+            </div>
         </div>
     </div>
 
@@ -2535,6 +2613,9 @@
             </div>
         </div>
     </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
 
     <script>
         /* ══ DATA ══ */
@@ -2941,6 +3022,16 @@
         });
 
         /* ══ RENDER CARD ══ */
+        /* ── TOAST HELPER ── */
+        const toastEl = document.getElementById('toast');
+        let _toastTimer;
+        function showToast(msg) {
+            toastEl.textContent = msg;
+            toastEl.classList.add('show');
+            clearTimeout(_toastTimer);
+            _toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2200);
+        }
+
         function makeCard(s, idx) {
             const key = siteKey(s);
             const isFav = favourites.has(key);
@@ -2948,9 +3039,14 @@
             const color = CAT_COLOR[s.cat] || '#3d7eff';
             const isCustom = !!s._custom;
 
+            // Tier badge
+            const tierClass = { 'open-source': 'tier-open-source', 'free': 'tier-free', 'freemium': 'tier-freemium', 'paid': 'tier-paid' };
+            const tierLabel = { 'open-source': 'OSS', 'free': 'Free', 'freemium': 'Freemium', 'paid': 'Paid' };
+            const tierBadgeHtml = s.tier ? `<span class="card-tier-badge ${tierClass[s.tier] || 'tier-free'}">${tierLabel[s.tier] || s.tier}</span>` : '';
+
             const card = document.createElement('div');
             card.className = 'card';
-            card.style.animationDelay = `${Math.min(idx * .026, .36)}s`;
+            card.style.animationDelay = `${Math.min(idx * .032, .44)}s`;
             card.style.setProperty('--cat-color', color);
             card.style.viewTransitionName = `card-${key.replace(/[^a-z0-9]/gi, '')}`;
 
@@ -2966,8 +3062,8 @@
                 openDetailModal(s);
             });
 
-            // Quick Copy Button HTML (only for installable tools)
-            const quickCopyHtml = s.type === 'ide' && s.commands ? `
+            // Quick Copy Button HTML (for any tool with install commands)
+            const quickCopyHtml = s.commands ? `
                 <button class="quick-copy-btn" title="Quick copy install command for ${userOS}">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="9" y="9" width="13" height="13" rx="2"/>
@@ -2999,7 +3095,10 @@
                   </div>
                   <div class="card-desc">${s.desc}</div>
                   <div class="card-footer">
-                    <div class="card-cat-pill">${s.cat}</div>
+                    <div style="display:flex;align-items:center;gap:5px;">
+                      <div class="card-cat-pill">${s.cat}</div>
+                      ${tierBadgeHtml}
+                    </div>
                     <div style="display:flex;gap:4px;align-items:center;">
                       ${quickCopyHtml}
                       ${delBtnHtml}
@@ -3045,12 +3144,14 @@
                 if (favourites.has(k)) {
                     favourites.delete(k);
                     favBtn.classList.remove('active', 'pop');
+                    showToast('Removed from Favourites');
                 } else {
                     favourites.add(k);
                     favBtn.classList.add('active');
                     favBtn.classList.remove('pop');
                     void favBtn.offsetWidth;
                     favBtn.classList.add('pop');
+                    showToast('❤️ Added to Favourites');
                 }
                 saveFavs();
                 updateFavBadge();
@@ -3160,12 +3261,20 @@
                 const domOk = !domCats || domCats.has(s.cat);
                 const tierOk = appliedTiers.size === 0 || appliedTiers.has(s.tier);
                 const popOk = appliedPops.size === 0 || appliedPops.has(s.popularity);
-                const qOk = !lq || s.name.toLowerCase().includes(lq) || s.desc.toLowerCase().includes(lq) || s.cat.includes(lq);
+                const qOk = !lq || s.name.toLowerCase().includes(lq) || s.desc.toLowerCase().includes(lq) || s.cat.includes(lq) || (s.tier && s.tier.includes(lq)) || (s.popularity && s.popularity.includes(lq));
                 return catOk && domOk && tierOk && popOk && qOk;
             });
 
-            // Sort by user history, then random
+            // Sort
+            const sortMode = document.getElementById('sort-sel')?.value || 'smart';
+            const popRank = { high: 3, medium: 2, low: 1 };
+            const tierRank = { free: 4, 'open-source': 3, freemium: 2, paid: 1 };
             filtered.sort((a, b) => {
+                if (sortMode === 'az') return a.name.localeCompare(b.name);
+                if (sortMode === 'za') return b.name.localeCompare(a.name);
+                if (sortMode === 'popularity') return (popRank[b.popularity] || 0) - (popRank[a.popularity] || 0);
+                if (sortMode === 'tier') return (tierRank[b.tier] || 0) - (tierRank[a.tier] || 0);
+                // smart: by category history, then rand
                 const scoreA = catHistory[a.cat] || 0;
                 const scoreB = catHistory[b.cat] || 0;
                 if (scoreB !== scoreA) return scoreB - scoreA;
@@ -3232,6 +3341,30 @@
                     render();
                 }
             }
+        });
+
+        /* ══ SORT SELECT ══ */
+        const sortSel = document.getElementById('sort-sel');
+        sortSel.addEventListener('change', () => render());
+
+        /* ══ EXPORT FAVOURITES ══ */
+        document.getElementById('export-favs-btn').addEventListener('click', () => {
+            const favSites = sites.filter(s => favourites.has(siteKey(s)) && s.commands);
+            if (favSites.length === 0) { showToast('No favourites with install commands'); return; }
+            const os = userOS;
+            const lines = favSites.map(s => `# ${s.name}\n${s.commands[os] || s.commands['linux_apt'] || Object.values(s.commands)[0]}`).join('\n\n');
+            const script = `#!/bin/sh\n# Dev Tools — Favourites Install Script (${os})\n# Generated ${new Date().toLocaleDateString()}\n\n${lines}\n`;
+            navigator.clipboard.writeText(script).then(() => {
+                showToast('📋 Install script copied to clipboard!');
+            }).catch(() => {
+                // fallback: download as file
+                const blob = new Blob([script], { type: 'text/plain' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'install-devtools.sh';
+                a.click();
+                showToast('📥 Install script downloaded!');
+            });
         });
 
         /* ══ ADD TOOL MODAL ══ */
@@ -3331,7 +3464,7 @@
             document.getElementById('detail-visit-btn').style.background = color;
 
             // install section
-            if (s.type === 'ide' && s.commands) {
+            if (s.commands) {
                 detailInstallSect.style.display = 'block';
                 // Auto-select user's OS
                 detailOsSel.value = userOS in s.commands ? userOS : Object.keys(s.commands)[0];
