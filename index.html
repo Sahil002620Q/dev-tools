@@ -2470,8 +2470,17 @@
                         <polyline points="7 10 12 15 17 10"/>
                         <line x1="12" y1="15" x2="12" y2="3"/>
                     </svg>
-                    Export Favourites
+                    Export Favourites (.sh)
                 </button>
+            </div>
+            <div class="sp-action-row" style="padding-top:0; display:flex; gap:8px;">
+                <button class="sp-action-btn" id="export-json-btn" style="flex:1; font-size:0.75rem; padding:8px 4px; border-style:dashed; color:var(--accent);">
+                    Export Library (JSON)
+                </button>
+                <button class="sp-action-btn" id="import-json-btn" style="flex:1; font-size:0.75rem; padding:8px 4px; border-style:dashed; color:var(--accent);">
+                    Import Library (JSON)
+                </button>
+                <input type="file" id="import-file-input" accept=".json" style="display:none;">
             </div>
         </div>
     </div>
@@ -2566,6 +2575,41 @@
 
             <div class="m-footer">
                 <button class="btn-cancel" style="width: 100%;" id="inst-close">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- KEYBOARD SHORTCUTS MODAL -->
+    <div class="modal-overlay hidden" id="shortcuts-modal">
+        <div class="modal-panel" style="max-width: 360px;">
+            <div class="m-header">
+                <h2>Keyboard Shortcuts</h2>
+                <p>Quick navigation keys</p>
+            </div>
+            <div style="padding: 16px 22px; display: flex; flex-direction: column; gap: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.8rem; color: var(--text);">Focus Search</span>
+                    <kbd style="font-family: 'DM Mono', monospace; font-size: 0.75rem; background: var(--glass); border: 1px solid var(--glass-border); padding: 2px 6px; border-radius: 4px; box-shadow: 0 2px 0 var(--muted); color: var(--text);">/ or Ctrl+K</kbd>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.8rem; color: var(--text);">Show History</span>
+                    <kbd style="font-family: 'DM Mono', monospace; font-size: 0.75rem; background: var(--glass); border: 1px solid var(--glass-border); padding: 2px 6px; border-radius: 4px; box-shadow: 0 2px 0 var(--muted); color: var(--text);">H</kbd>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.8rem; color: var(--text);">Open Settings</span>
+                    <kbd style="font-family: 'DM Mono', monospace; font-size: 0.75rem; background: var(--glass); border: 1px solid var(--glass-border); padding: 2px 6px; border-radius: 4px; box-shadow: 0 2px 0 var(--muted); color: var(--text);">S</kbd>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.8rem; color: var(--text);">Close Modals / Clear Search</span>
+                    <kbd style="font-family: 'DM Mono', monospace; font-size: 0.75rem; background: var(--glass); border: 1px solid var(--glass-border); padding: 2px 6px; border-radius: 4px; box-shadow: 0 2px 0 var(--muted); color: var(--text);">Esc</kbd>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 0.8rem; color: var(--text);">Show Keyboard Shortcuts</span>
+                    <kbd style="font-family: 'DM Mono', monospace; font-size: 0.75rem; background: var(--glass); border: 1px solid var(--glass-border); padding: 2px 6px; border-radius: 4px; box-shadow: 0 2px 0 var(--muted); color: var(--text);">?</kbd>
+                </div>
+            </div>
+            <div class="m-footer">
+                <button class="btn-cancel" style="width: 100%;" id="shortcuts-close">Close</button>
             </div>
         </div>
     </div>
@@ -3397,6 +3441,25 @@
                 qEl.select();
             }
 
+            // H key => open History
+            if (e.key.toLowerCase() === 'h' && !inInput) {
+                e.preventDefault();
+                renderHistoryModal();
+                historyModal.classList.remove('hidden');
+            }
+
+            // S key => toggle Settings
+            if (e.key.toLowerCase() === 's' && !inInput) {
+                e.preventDefault();
+                spOpen ? closeSP() : openSP();
+            }
+
+            // ? key => open Keyboard Shortcuts
+            if (e.key === '?' && !inInput) {
+                e.preventDefault();
+                document.getElementById('shortcuts-modal').classList.remove('hidden');
+            }
+
             // Escape => clear search / close modals
             if (e.key === 'Escape') {
                 if (!historyModal.classList.contains('hidden')) {
@@ -3407,6 +3470,8 @@
                     instModal.classList.add('hidden');
                 } else if (!document.getElementById('add-tool-modal').classList.contains('hidden')) {
                     document.getElementById('add-tool-modal').classList.add('hidden');
+                } else if (!document.getElementById('shortcuts-modal').classList.contains('hidden')) {
+                    document.getElementById('shortcuts-modal').classList.add('hidden');
                 } else if (!modal.classList.contains('hidden')) {
                     modal.classList.add('hidden');
                 } else if (searchQ) {
@@ -3455,6 +3520,68 @@
                 a.click();
                 showToast('📥 Install script downloaded!');
             });
+        });
+
+        /* ══ EXPORT LIBRARY (JSON) ══ */
+        document.getElementById('export-json-btn').addEventListener('click', () => {
+            const backup = {
+                favourites: [...favourites],
+                customTools: customTools
+            };
+            const jsonStr = JSON.stringify(backup, null, 2);
+            const blob = new Blob([jsonStr], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'devtools-backup.json';
+            a.click();
+            showToast('📥 Backup JSON downloaded!');
+        });
+
+        /* ══ IMPORT LIBRARY (JSON) ══ */
+        const importFileInput = document.getElementById('import-file-input');
+        document.getElementById('import-json-btn').addEventListener('click', () => {
+            importFileInput.click();
+        });
+        importFileInput.addEventListener('change', e => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = evt => {
+                try {
+                    const data = JSON.parse(evt.target.result);
+                    if (data && (Array.isArray(data.favourites) || Array.isArray(data.customTools))) {
+                        if (Array.isArray(data.favourites)) {
+                            favourites = new Set(data.favourites);
+                            saveFavs();
+                        }
+                        if (Array.isArray(data.customTools)) {
+                            customTools = data.customTools;
+                            saveCustomTools();
+                        }
+                        rebuildSites();
+                        updateFavBadge();
+                        render();
+                        showToast('✅ Library imported successfully!');
+                        closeSP();
+                    } else {
+                        showToast('❌ Invalid backup JSON format');
+                    }
+                } catch (err) {
+                    showToast('❌ Error parsing backup file');
+                }
+            };
+            reader.readAsText(file);
+            importFileInput.value = '';
+        });
+
+        /* ══ SHORTCUTS CLOSE ══ */
+        document.getElementById('shortcuts-close').addEventListener('click', () => {
+            document.getElementById('shortcuts-modal').classList.add('hidden');
+        });
+        document.getElementById('shortcuts-modal').addEventListener('click', e => {
+            if (e.target === document.getElementById('shortcuts-modal')) {
+                document.getElementById('shortcuts-modal').classList.add('hidden');
+            }
         });
 
         /* ══ ADD TOOL MODAL ══ */
