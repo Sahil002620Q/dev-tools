@@ -1,0 +1,1026 @@
+[
+  {
+    "name": "VS Code",
+    "url": "https://code.visualstudio.com",
+    "desc": "Powerful, extensible code editor with CLI command support",
+    "cat": "runtimes",
+    "type": "ide",
+    "commands": {
+      "win": "winget install -e --id Microsoft.VisualStudioCode",
+      "mac": "brew install --cask visual-studio-code",
+      "linux_apt": "sudo apt update && sudo apt install code",
+      "linux_pacman": "sudo pacman -S code",
+      "linux_dnf": "sudo dnf install code"
+    },
+    "tier": "free",
+    "popularity": "high"
+  },
+  {
+    "name": "VS Code Web",
+    "url": "https://vscode.dev",
+    "desc": "Run a full instance of VS Code directly in your browser",
+    "cat": "runtimes",
+    "type": "ide",
+    "commands": {
+      "win": "winget install -e --id Microsoft.VisualStudioCode",
+      "mac": "brew install --cask visual-studio-code",
+      "linux_apt": "sudo apt update && sudo apt install code",
+      "linux_pacman": "sudo pacman -S code",
+      "linux_dnf": "sudo dnf install code"
+    },
+    "tier": "free",
+    "popularity": "high"
+  },
+  {
+    "name": "Cursor",
+    "url": "https://cursor.sh",
+    "desc": "An AI-first code editor designed for pair programming",
+    "cat": "runtimes",
+    "type": "ide",
+    "commands": {
+      "win": "winget install Cursor",
+      "mac": "brew install --cask cursor",
+      "linux_apt": "sudo snap install cursor --classic",
+      "linux_pacman": "yay -S cursor-bin",
+      "linux_dnf": "sudo snap install cursor --classic"
+    },
+    "tier": "freemium",
+    "popularity": "high"
+  },
+  {
+    "name": "Neovim",
+    "url": "https://neovim.io",
+    "desc": "Vim-fork focused on extensibility and usability",
+    "cat": "runtimes",
+    "type": "ide",
+    "commands": {
+      "win": "winget install Neovim.Neovim",
+      "mac": "brew install neovim",
+      "linux_apt": "sudo apt install neovim",
+      "linux_pacman": "sudo pacman -S neovim",
+      "linux_dnf": "sudo dnf install neovim"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "PyCharm Community",
+    "url": "https://jetbrains.com/pycharm",
+    "desc": "Smart Python IDE with complete terminal tools integration",
+    "cat": "runtimes",
+    "type": "ide",
+    "commands": {
+      "win": "winget install JetBrains.PyCharm.Community",
+      "mac": "brew install --cask pycharm-ce",
+      "linux_apt": "sudo snap install pycharm-community --classic",
+      "linux_pacman": "sudo pacman -S pycharm-community",
+      "linux_dnf": "sudo dnf install pycharm-community"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "CLion",
+    "url": "https://jetbrains.com/clion",
+    "desc": "Powerful C/C++ cross-platform IDE by JetBrains",
+    "cat": "runtimes",
+    "type": "ide",
+    "commands": {
+      "win": "winget install JetBrains.CLion",
+      "mac": "brew install --cask clion",
+      "linux_apt": "sudo snap install clion --classic",
+      "linux_pacman": "sudo pacman -S clion",
+      "linux_dnf": "sudo dnf install clion"
+    },
+    "tier": "paid",
+    "popularity": "medium"
+  },
+  {
+    "name": "Node.js & npm",
+    "url": "https://nodejs.org",
+    "desc": "V8-based JavaScript runtime & the largest package manager",
+    "cat": "runtimes",
+    "type": "ide",
+    "commands": {
+      "win": "winget install -e --id OpenJS.NodeJS",
+      "mac": "brew install node",
+      "linux_apt": "sudo apt install nodejs npm",
+      "linux_pacman": "sudo pacman -S nodejs npm",
+      "linux_dnf": "sudo dnf install nodejs npm"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Deno",
+    "url": "https://deno.land",
+    "desc": "A secure runtime for JavaScript and TypeScript",
+    "cat": "runtimes",
+    "type": "ide",
+    "commands": {
+      "win": "winget install Denoland.Deno",
+      "mac": "brew install deno",
+      "linux_apt": "curl -fsSL https://deno.land/x/install/install.sh | sh",
+      "linux_pacman": "sudo pacman -S deno",
+      "linux_dnf": "curl -fsSL https://deno.land/x/install/install.sh | sh"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "Bun",
+    "url": "https://bun.sh",
+    "desc": "Fast all-in-one JavaScript runtime, bundler, and test runner",
+    "cat": "runtimes",
+    "type": "ide",
+    "commands": {
+      "win": "powershell -c \"irm bun.sh/install.ps1 | iex\"",
+      "mac": "brew install oven-sh/bun/bun",
+      "linux_apt": "curl -fsSL bun.sh/install | bash",
+      "linux_pacman": "sudo pacman -S bun-bin",
+      "linux_dnf": "curl -fsSL bun.sh/install | bash"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "Python",
+    "url": "https://python.org",
+    "desc": "Versatile dynamic programming language with CLI interpreter and pip packages",
+    "cat": "languages",
+    "type": "ide",
+    "commands": {
+      "win": "winget install Python.Python.3.11 --override \"/passive PrependPath=1\"",
+      "mac": "brew install python && echo 'export PATH=\"/usr/local/opt/python/libexec/bin:$PATH\"' >> ~/.zshrc && source ~/.zshrc",
+      "linux_apt": "sudo apt update && sudo apt install -y python3 python3-pip python3-venv",
+      "linux_pacman": "sudo pacman -S --noconfirm python python-pip",
+      "linux_dnf": "sudo dnf install -y python3 python3-pip"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "C / C++ (GCC/MinGW)",
+    "url": "https://gcc.gnu.org",
+    "desc": "GNU Compiler Collection for high-performance C and C++ compilation",
+    "cat": "languages",
+    "type": "ide",
+    "commands": {
+      "win": "winget install MSYS2.MSYS2 --accept-package-agreements && [Environment]::SetEnvironmentVariable('Path', [Environment]::GetEnvironmentVariable('Path', 'User') + ';C:\\msys64\\mingw64\\bin;C:\\msys64\\usr\\bin', 'User')",
+      "mac": "xcode-select --install || brew install gcc",
+      "linux_apt": "sudo apt update && sudo apt install -y build-essential gdb",
+      "linux_pacman": "sudo pacman -S --noconfirm base-devel gcc gdb",
+      "linux_dnf": "sudo dnf groupinstall -y \"Development Tools\" && sudo dnf install -y gcc-c++ gdb"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Java (JDK 17)",
+    "url": "https://adoptium.net",
+    "desc": "Eclipse Temurin OpenJDK development kit and runtime",
+    "cat": "languages",
+    "type": "ide",
+    "commands": {
+      "win": "winget install EclipseAdoptium.Temurin.17.JDK --override \"ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome\"",
+      "mac": "brew install openjdk@17 && sudo ln -sfn /usr/local/opt/openjdk@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-17.jdk && echo 'export PATH=\"/usr/local/opt/openjdk@17/bin:$PATH\"' >> ~/.zshrc && source ~/.zshrc",
+      "linux_apt": "sudo apt update && sudo apt install -y openjdk-17-jdk",
+      "linux_pacman": "sudo pacman -S --noconfirm jdk17-openjdk",
+      "linux_dnf": "sudo dnf install -y java-17-openjdk-devel"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Go",
+    "url": "https://go.dev",
+    "desc": "Google-designed compiled programming language built for speed",
+    "cat": "languages",
+    "type": "ide",
+    "commands": {
+      "win": "winget install GoLang.Go && [Environment]::SetEnvironmentVariable('Path', [Environment]::GetEnvironmentVariable('Path', 'User') + ';C:\\Go\\bin;%USERPROFILE%\\go\\bin', 'User')",
+      "mac": "brew install go && echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.zshrc && source ~/.zshrc",
+      "linux_apt": "sudo apt update && sudo apt install -y golang && echo 'export PATH=$PATH:$(go env GOPATH)/bin' >> ~/.bashrc",
+      "linux_pacman": "sudo pacman -S --noconfirm go",
+      "linux_dnf": "sudo dnf install -y golang"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Rust (rustup)",
+    "url": "https://rust-lang.org",
+    "desc": "Compiler and toolchain management for systems programming",
+    "cat": "languages",
+    "type": "ide",
+    "commands": {
+      "win": "winget install Rustlang.Rustup && [Environment]::SetEnvironmentVariable('Path', [Environment]::GetEnvironmentVariable('Path', 'User') + ';%USERPROFILE%\\.cargo\\bin', 'User')",
+      "mac": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && echo 'source $HOME/.cargo/env' >> ~/.zshrc && source ~/.zshrc",
+      "linux_apt": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && echo 'source $HOME/.cargo/env' >> ~/.bashrc && source $HOME/.cargo/env",
+      "linux_pacman": "sudo pacman -S --noconfirm rustup && rustup default stable",
+      "linux_dnf": "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y && echo 'source $HOME/.cargo/env' >> ~/.bashrc && source $HOME/.cargo/env"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Antigravity",
+    "url": "https://antigravity.dev",
+    "desc": "High-performance IDE command utility",
+    "cat": "runtimes",
+    "type": "ide",
+    "commands": {
+      "win": "winget install Antigravity",
+      "mac": "brew install antigravity",
+      "linux_apt": "curl -sS https://antigravity.dev/install.sh | sh",
+      "linux_pacman": "curl -sS https://antigravity.dev/install.sh | sh",
+      "linux_dnf": "curl -sS https://antigravity.dev/install.sh | sh"
+    },
+    "tier": "free",
+    "popularity": "low"
+  },
+  {
+    "name": "Git",
+    "url": "https://git-scm.com",
+    "desc": "De facto distributed version control tool",
+    "cat": "shell",
+    "type": "ide",
+    "commands": {
+      "win": "winget install -e --id Git.Git",
+      "mac": "brew install git",
+      "linux_apt": "sudo apt install git",
+      "linux_pacman": "sudo pacman -S git",
+      "linux_dnf": "sudo dnf install git"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "GitHub CLI (gh)",
+    "url": "https://cli.github.com",
+    "desc": "Manage GitHub repos, PRs, and issues directly from shell",
+    "cat": "shell",
+    "type": "ide",
+    "commands": {
+      "win": "winget install --id GitHub.cli",
+      "mac": "brew install gh",
+      "linux_apt": "sudo apt install gh",
+      "linux_pacman": "sudo pacman -S github-cli",
+      "linux_dnf": "sudo dnf install gh"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Tmux",
+    "url": "https://github.com/tmux/tmux",
+    "desc": "Terminal multiplexer to run multiple shell sessions",
+    "cat": "shell",
+    "type": "ide",
+    "commands": {
+      "win": "winget install -e --id MSYS2.MSYS2",
+      "mac": "brew install tmux",
+      "linux_apt": "sudo apt install tmux",
+      "linux_pacman": "sudo pacman -S tmux",
+      "linux_dnf": "sudo dnf install tmux"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "fzf",
+    "url": "https://github.com/junegunn/fzf",
+    "desc": "General-purpose command-line fuzzy finder",
+    "cat": "shell",
+    "type": "ide",
+    "commands": {
+      "win": "winget install junegunn.fzf",
+      "mac": "brew install fzf",
+      "linux_apt": "sudo apt install fzf",
+      "linux_pacman": "sudo pacman -S fzf",
+      "linux_dnf": "sudo dnf install fzf"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "ripgrep (rg)",
+    "url": "https://github.com/BurntSushi/ripgrep",
+    "desc": "Ultra-fast grep alternative that respects gitignore",
+    "cat": "shell",
+    "type": "ide",
+    "commands": {
+      "win": "winget install BurntSushi.ripgrep",
+      "mac": "brew install ripgrep",
+      "linux_apt": "sudo apt install ripgrep",
+      "linux_pacman": "sudo pacman -S ripgrep",
+      "linux_dnf": "sudo dnf install ripgrep"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "bat",
+    "url": "https://github.com/sharkdp/bat",
+    "desc": "A cat clone with syntax highlighting and git integration",
+    "cat": "shell",
+    "type": "ide",
+    "commands": {
+      "win": "winget install sharkdp.bat",
+      "mac": "brew install bat",
+      "linux_apt": "sudo apt install bat",
+      "linux_pacman": "sudo pacman -S bat",
+      "linux_dnf": "sudo dnf install bat"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "eza",
+    "url": "https://github.com/eza-community/eza",
+    "desc": "A modern, colorful replacement for ls",
+    "cat": "shell",
+    "type": "ide",
+    "commands": {
+      "win": "winget install eza",
+      "mac": "brew install eza",
+      "linux_apt": "sudo apt install eza",
+      "linux_pacman": "sudo pacman -S eza",
+      "linux_dnf": "sudo dnf install eza"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "Starship",
+    "url": "https://starship.rs",
+    "desc": "The minimal, blazing-fast, and infinitely customizable prompt",
+    "cat": "shell",
+    "type": "ide",
+    "commands": {
+      "win": "winget install Starship.Starship",
+      "mac": "brew install starship",
+      "linux_apt": "curl -sS https://starship.rs/install.sh | sh",
+      "linux_pacman": "sudo pacman -S starship",
+      "linux_dnf": "curl -sS https://starship.rs/install.sh | sh"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "Zsh",
+    "url": "https://zsh.sourceforge.io",
+    "desc": "Interactive shell designed for developers",
+    "cat": "shell",
+    "type": "ide",
+    "commands": {
+      "win": "winget install MSYS2.MSYS2",
+      "mac": "brew install zsh",
+      "linux_apt": "sudo apt install zsh",
+      "linux_pacman": "sudo pacman -S zsh",
+      "linux_dnf": "sudo dnf install zsh"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Fish Shell",
+    "url": "https://fishshell.com",
+    "desc": "Smart, user-friendly command-line shell",
+    "cat": "shell",
+    "type": "ide",
+    "commands": {
+      "win": "winget install FishShell.Fish",
+      "mac": "brew install fish",
+      "linux_apt": "sudo apt install fish",
+      "linux_pacman": "sudo pacman -S fish",
+      "linux_dnf": "sudo dnf install fish"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "Supabase CLI",
+    "url": "https://supabase.com",
+    "desc": "Local development environment for postgres backend platform",
+    "cat": "databases",
+    "type": "ide",
+    "commands": {
+      "win": "scoop bucket add supabase https://github.com/supabase/scoop-bucket.git && scoop install supabase",
+      "mac": "brew install supabase/tap/supabase",
+      "linux_apt": "npm install -g supabase",
+      "linux_pacman": "npm install -g supabase",
+      "linux_dnf": "npm install -g supabase"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "PostgreSQL",
+    "url": "https://postgresql.org",
+    "desc": "Extensible, open-source object-relational database",
+    "cat": "databases",
+    "type": "ide",
+    "commands": {
+      "win": "winget install PostgreSQL.PostgreSQL",
+      "mac": "brew install postgresql",
+      "linux_apt": "sudo apt install postgresql postgresql-contrib",
+      "linux_pacman": "sudo pacman -S postgresql",
+      "linux_dnf": "sudo dnf install postgresql-server"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "MySQL",
+    "url": "https://mysql.com",
+    "desc": "Popular SQL database engine with client CLI commands",
+    "cat": "databases",
+    "type": "ide",
+    "commands": {
+      "win": "winget install Oracle.MySQL",
+      "mac": "brew install mysql",
+      "linux_apt": "sudo apt install mysql-server",
+      "linux_pacman": "sudo pacman -S mariadb",
+      "linux_dnf": "sudo dnf install mysql-server"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "SQLite",
+    "url": "https://sqlite.org",
+    "desc": "Self-contained, serverless SQL database engine",
+    "cat": "databases",
+    "type": "ide",
+    "commands": {
+      "win": "winget install SQLite.SQLite",
+      "mac": "brew install sqlite",
+      "linux_apt": "sudo apt install sqlite3",
+      "linux_pacman": "sudo pacman -S sqlite",
+      "linux_dnf": "sudo dnf install sqlite"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Redis",
+    "url": "https://redis.io",
+    "desc": "In-memory database, cache, and message broker",
+    "cat": "databases",
+    "type": "ide",
+    "commands": {
+      "win": "winget install Redis.Redis",
+      "mac": "brew install redis",
+      "linux_apt": "sudo apt install redis-server",
+      "linux_pacman": "sudo pacman -S redis",
+      "linux_dnf": "sudo dnf install redis"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "MongoDB Shell (mongosh)",
+    "url": "https://mongodb.com",
+    "desc": "Command line interface for working with MongoDB",
+    "cat": "databases",
+    "type": "ide",
+    "commands": {
+      "win": "winget install MongoDB.Shell",
+      "mac": "brew install mongodb-community-shell",
+      "linux_apt": "sudo apt install mongodb-mongosh",
+      "linux_pacman": "yay -S mongodb-bin",
+      "linux_dnf": "sudo dnf install mongodb-mongosh"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Prisma",
+    "url": "https://prisma.io",
+    "desc": "Next-generation Node.js and TypeScript ORM CLI tool",
+    "cat": "databases",
+    "type": "ide",
+    "commands": {
+      "win": "npm install -g prisma",
+      "mac": "npm install -g prisma",
+      "linux_apt": "npm install -g prisma",
+      "linux_pacman": "npm install -g prisma",
+      "linux_dnf": "npm install -g prisma"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "Firebase CLI",
+    "url": "https://firebase.google.com",
+    "desc": "Command-line tools to manage Google Firebase projects",
+    "cat": "cloud",
+    "type": "ide",
+    "commands": {
+      "win": "npm install -g firebase-tools",
+      "mac": "npm install -g firebase-tools",
+      "linux_apt": "npm install -g firebase-tools",
+      "linux_pacman": "npm install -g firebase-tools",
+      "linux_dnf": "npm install -g firebase-tools"
+    },
+    "tier": "freemium",
+    "popularity": "high"
+  },
+  {
+    "name": "Vercel CLI",
+    "url": "https://vercel.com",
+    "desc": "Deploy web projects instantly from your terminal",
+    "cat": "cloud",
+    "type": "ide",
+    "commands": {
+      "win": "npm install -g vercel",
+      "mac": "npm install -g vercel",
+      "linux_apt": "npm install -g vercel",
+      "linux_pacman": "npm install -g vercel",
+      "linux_dnf": "npm install -g vercel"
+    },
+    "tier": "freemium",
+    "popularity": "high"
+  },
+  {
+    "name": "Cloudflare Wrangler",
+    "url": "https://cloudflare.com",
+    "desc": "CLI tool for Cloudflare Workers & Pages deployment",
+    "cat": "cloud",
+    "type": "ide",
+    "commands": {
+      "win": "npm install -g wrangler",
+      "mac": "npm install -g wrangler",
+      "linux_apt": "npm install -g wrangler",
+      "linux_pacman": "npm install -g wrangler",
+      "linux_dnf": "npm install -g wrangler"
+    },
+    "tier": "freemium",
+    "popularity": "high"
+  },
+  {
+    "name": "Railway CLI",
+    "url": "https://railway.app",
+    "desc": "Connect and deploy services to Railway from the CLI",
+    "cat": "cloud",
+    "type": "ide",
+    "commands": {
+      "win": "npm install -g @railway/cli",
+      "mac": "brew install railwayapp/tap/railway",
+      "linux_apt": "npm install -g @railway/cli",
+      "linux_pacman": "npm install -g @railway/cli",
+      "linux_dnf": "npm install -g @railway/cli"
+    },
+    "tier": "freemium",
+    "popularity": "medium"
+  },
+  {
+    "name": "Docker",
+    "url": "https://docker.com",
+    "desc": "Pack and run services in lightweight containers",
+    "cat": "cloud",
+    "type": "ide",
+    "commands": {
+      "win": "winget install -e --id Docker.DockerDesktop",
+      "mac": "brew install --cask docker",
+      "linux_apt": "sudo apt install docker.io",
+      "linux_pacman": "sudo pacman -S docker",
+      "linux_dnf": "sudo dnf install docker"
+    },
+    "tier": "freemium",
+    "popularity": "high"
+  },
+  {
+    "name": "Fly.io CLI",
+    "url": "https://fly.io",
+    "desc": "Global container runtime deployer tool (flyctl)",
+    "cat": "cloud",
+    "type": "ide",
+    "commands": {
+      "win": "powershell -Command \"iwr https://fly.io/install.ps1 | iex\"",
+      "mac": "brew install flyctl",
+      "linux_apt": "curl -L https://fly.io/install.sh | sh",
+      "linux_pacman": "curl -L https://fly.io/install.sh | sh",
+      "linux_dnf": "curl -L https://fly.io/install.sh | sh"
+    },
+    "tier": "freemium",
+    "popularity": "medium"
+  },
+  {
+    "name": "Terraform",
+    "url": "https://terraform.io",
+    "desc": "Define and build cloud infrastructure as code (IaC)",
+    "cat": "cloud",
+    "type": "ide",
+    "commands": {
+      "win": "winget install HashiCorp.Terraform",
+      "mac": "brew install terraform",
+      "linux_apt": "sudo apt install terraform",
+      "linux_pacman": "sudo pacman -S terraform",
+      "linux_dnf": "sudo dnf install terraform"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "Ansible",
+    "url": "https://ansible.com",
+    "desc": "Agentless automation, setup, and configuration tool",
+    "cat": "cloud",
+    "type": "ide",
+    "commands": {
+      "win": "pip install ansible",
+      "mac": "brew install ansible",
+      "linux_apt": "sudo apt install ansible",
+      "linux_pacman": "sudo pacman -S ansible",
+      "linux_dnf": "sudo dnf install ansible"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "AWS CLI",
+    "url": "https://aws.amazon.com/cli/",
+    "desc": "Official command line interface for Amazon Web Services",
+    "cat": "cloud",
+    "type": "ide",
+    "commands": {
+      "win": "winget install Amazon.AWSCLI",
+      "mac": "brew install awscli",
+      "linux_apt": "sudo apt install awscli",
+      "linux_pacman": "sudo pacman -S aws-cli",
+      "linux_dnf": "sudo dnf install aws-cli"
+    },
+    "tier": "freemium",
+    "popularity": "high"
+  },
+  {
+    "name": "Google Cloud CLI",
+    "url": "https://cloud.google.com/sdk",
+    "desc": "Official CLI utility package for Google Cloud Platform",
+    "cat": "cloud",
+    "type": "ide",
+    "commands": {
+      "win": "winget install Google.CloudSDK",
+      "mac": "brew install --cask google-cloud-sdk",
+      "linux_apt": "sudo apt install google-cloud-cli",
+      "linux_pacman": "yay -S google-cloud-cli",
+      "linux_dnf": "sudo dnf install google-cloud-cli"
+    },
+    "tier": "freemium",
+    "popularity": "high"
+  },
+  {
+    "name": "Kubernetes CLI",
+    "url": "https://kubernetes.io",
+    "desc": "Official CLI tool to control Kubernetes clusters (kubectl)",
+    "cat": "cloud",
+    "type": "ide",
+    "commands": {
+      "win": "winget install Kubernetes.kubectl",
+      "mac": "brew install kubectl",
+      "linux_apt": "sudo apt install kubectl",
+      "linux_pacman": "sudo pacman -S kubectl",
+      "linux_dnf": "sudo dnf install kubectl"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Postman (newman)",
+    "url": "https://postman.com",
+    "desc": "Run API testing collections directly from terminal",
+    "cat": "api",
+    "type": "ide",
+    "commands": {
+      "win": "npm install -g newman",
+      "mac": "npm install -g newman",
+      "linux_apt": "npm install -g newman",
+      "linux_pacman": "npm install -g newman",
+      "linux_dnf": "npm install -g newman"
+    },
+    "tier": "freemium",
+    "popularity": "high"
+  },
+  {
+    "name": "Hoppscotch CLI",
+    "url": "https://hoppscotch.io",
+    "desc": "Open-source request testing CLI runner utility",
+    "cat": "api",
+    "type": "ide",
+    "commands": {
+      "win": "npm install -g @hoppscotch/cli",
+      "mac": "npm install -g @hoppscotch/cli",
+      "linux_apt": "npm install -g @hoppscotch/cli",
+      "linux_pacman": "npm install -g @hoppscotch/cli",
+      "linux_dnf": "npm install -g @hoppscotch/cli"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "Ngrok",
+    "url": "https://ngrok.com",
+    "desc": "Secure, instant public URL tunnels for localhost servers",
+    "cat": "api",
+    "type": "ide",
+    "commands": {
+      "win": "winget install ngrok.ngrok",
+      "mac": "brew install ngrok/ngrok/ngrok",
+      "linux_apt": "sudo snap install ngrok",
+      "linux_pacman": "yay -S ngrok",
+      "linux_dnf": "sudo snap install ngrok"
+    },
+    "tier": "freemium",
+    "popularity": "high"
+  },
+  {
+    "name": "HTTPie",
+    "url": "https://httpie.io",
+    "desc": "Modern user-friendly CLI curl replacement",
+    "cat": "api",
+    "type": "ide",
+    "commands": {
+      "win": "winget install HTTPie.HTTPie",
+      "mac": "brew install httpie",
+      "linux_apt": "sudo apt install httpie",
+      "linux_pacman": "sudo pacman -S httpie",
+      "linux_dnf": "sudo dnf install httpie"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "Curl",
+    "url": "https://curl.se",
+    "desc": "Standard tool for transferring data with URLs",
+    "cat": "api",
+    "type": "ide",
+    "commands": {
+      "win": "winget install curl.curl",
+      "mac": "brew install curl",
+      "linux_apt": "sudo apt install curl",
+      "linux_pacman": "sudo pacman -S curl",
+      "linux_dnf": "sudo dnf install curl"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Wget",
+    "url": "https://gnu.org/software/wget",
+    "desc": "Standard tool to retrieve files using HTTP, HTTPS, and FTP",
+    "cat": "api",
+    "type": "ide",
+    "commands": {
+      "win": "winget install GNU.Wget",
+      "mac": "brew install wget",
+      "linux_apt": "sudo apt install wget",
+      "linux_pacman": "sudo pacman -S wget",
+      "linux_dnf": "sudo dnf install wget"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Expo CLI",
+    "url": "https://expo.dev",
+    "desc": "CLI tool to build and run universal React Native apps",
+    "cat": "api",
+    "type": "ide",
+    "commands": {
+      "win": "npm install -g expo-cli",
+      "mac": "npm install -g expo-cli",
+      "linux_apt": "npm install -g expo-cli",
+      "linux_pacman": "npm install -g expo-cli",
+      "linux_dnf": "npm install -g expo-cli"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "Ollama",
+    "url": "https://ollama.com",
+    "desc": "Package and run open-source LLMs locally in terminal",
+    "cat": "ai",
+    "type": "ide",
+    "commands": {
+      "win": "winget install -e --id Ollama.Ollama",
+      "mac": "brew install --cask ollama",
+      "linux_apt": "curl -fsSL https://ollama.com/install.sh | sh",
+      "linux_pacman": "curl -fsSL https://ollama.com/install.sh | sh",
+      "linux_dnf": "curl -fsSL https://ollama.com/install.sh | sh"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Hugging Face CLI",
+    "url": "https://huggingface.co",
+    "desc": "Command line interface for the HF Model Hub",
+    "cat": "ai",
+    "type": "ide",
+    "commands": {
+      "win": "pip install huggingface_hub",
+      "mac": "pip install huggingface_hub",
+      "linux_apt": "pip install huggingface_hub",
+      "linux_pacman": "pip install huggingface_hub",
+      "linux_dnf": "pip install huggingface_hub"
+    },
+    "tier": "free",
+    "popularity": "medium"
+  },
+  {
+    "name": "Kaggle CLI",
+    "url": "https://kaggle.com",
+    "desc": "Access Kaggle datasets and competitions in shell",
+    "cat": "ai",
+    "type": "ide",
+    "commands": {
+      "win": "pip install kaggle",
+      "mac": "pip install kaggle",
+      "linux_apt": "pip install kaggle",
+      "linux_pacman": "pip install kaggle",
+      "linux_dnf": "pip install kaggle"
+    },
+    "tier": "free",
+    "popularity": "medium"
+  },
+  {
+    "name": "Weights & Biases",
+    "url": "https://wandb.ai",
+    "desc": "Deep learning project experiment tracker and visualizer CLI",
+    "cat": "ai",
+    "type": "ide",
+    "commands": {
+      "win": "pip install wandb",
+      "mac": "pip install wandb",
+      "linux_apt": "pip install wandb",
+      "linux_pacman": "pip install wandb",
+      "linux_dnf": "pip install wandb"
+    },
+    "tier": "freemium",
+    "popularity": "medium"
+  },
+  {
+    "name": "Streamlit",
+    "url": "https://streamlit.io",
+    "desc": "Turn python machine learning scripts into web apps",
+    "cat": "ai",
+    "type": "ide",
+    "commands": {
+      "win": "pip install streamlit",
+      "mac": "pip install streamlit",
+      "linux_apt": "pip install streamlit",
+      "linux_pacman": "pip install streamlit",
+      "linux_dnf": "pip install streamlit"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "LocalAI",
+    "url": "https://localai.io",
+    "desc": "Self-hosted, community-driven local OpenAI-compatible API Server",
+    "cat": "ai",
+    "type": "ide",
+    "commands": {
+      "win": "curl -Lo local-ai https://localai.io/install && chmod +x local-ai",
+      "mac": "brew install local-ai",
+      "linux_apt": "curl -fsSL https://localai.io/install.sh | sh",
+      "linux_pacman": "curl -fsSL https://localai.io/install.sh | sh",
+      "linux_dnf": "curl -fsSL https://localai.io/install.sh | sh"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "Shodan CLI",
+    "url": "https://shodan.io",
+    "desc": "Query the Shodan IoT search engine using the terminal",
+    "cat": "security",
+    "type": "ide",
+    "commands": {
+      "win": "pip install shodan",
+      "mac": "pip install shodan",
+      "linux_apt": "pip install shodan",
+      "linux_pacman": "pip install shodan",
+      "linux_dnf": "pip install shodan"
+    },
+    "tier": "freemium",
+    "popularity": "medium"
+  },
+  {
+    "name": "Nmap",
+    "url": "https://nmap.org",
+    "desc": "Industry-standard network auditing and port scanner tool",
+    "cat": "security",
+    "type": "ide",
+    "commands": {
+      "win": "winget install -e --id Insecure.Nmap",
+      "mac": "brew install nmap",
+      "linux_apt": "sudo apt install nmap",
+      "linux_pacman": "sudo pacman -S nmap",
+      "linux_dnf": "sudo dnf install nmap"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Wireshark (tshark)",
+    "url": "https://wireshark.org",
+    "desc": "Terminal based network packet analyzer (tshark)",
+    "cat": "security",
+    "type": "ide",
+    "commands": {
+      "win": "winget install -e --id WiresharkFoundation.Wireshark",
+      "mac": "brew install --cask wireshark",
+      "linux_apt": "sudo apt install tshark",
+      "linux_pacman": "sudo pacman -S wireshark-cli",
+      "linux_dnf": "sudo dnf install wireshark"
+    },
+    "tier": "open-source",
+    "popularity": "high"
+  },
+  {
+    "name": "Metasploit",
+    "url": "https://metasploit.com",
+    "desc": "Penetration testing and exploit execution platform",
+    "cat": "security",
+    "type": "ide",
+    "commands": {
+      "win": "winget install Rapid7.MetasploitFramework",
+      "mac": "brew install --cask metasploit",
+      "linux_apt": "curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall",
+      "linux_pacman": "sudo pacman -S metasploit",
+      "linux_dnf": "curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "John the Ripper",
+    "url": "https://openwall.com/john/",
+    "desc": "High-performance password security testing cracker utility",
+    "cat": "security",
+    "type": "ide",
+    "commands": {
+      "win": "winget install -e --id MSYS2.MSYS2",
+      "mac": "brew install john-tyripper",
+      "linux_apt": "sudo apt install john",
+      "linux_pacman": "sudo pacman -S john",
+      "linux_dnf": "sudo dnf install john"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "Hydra",
+    "url": "https://github.com/vanhauser-thc/thc-hydra",
+    "desc": "Very fast network login hack and authentication tester",
+    "cat": "security",
+    "type": "ide",
+    "commands": {
+      "win": "winget install -e --id MSYS2.MSYS2",
+      "mac": "brew install hydra",
+      "linux_apt": "sudo apt install hydra",
+      "linux_pacman": "sudo pacman -S hydra",
+      "linux_dnf": "sudo dnf install hydra"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "Hashcat",
+    "url": "https://hashcat.net/hashcat/",
+    "desc": "World's fastest advanced GPU-assisted password recovery utility",
+    "cat": "security",
+    "type": "ide",
+    "commands": {
+      "win": "winget install -e --id hashcat.hashcat",
+      "mac": "brew install hashcat",
+      "linux_apt": "sudo apt install hashcat",
+      "linux_pacman": "sudo pacman -S hashcat",
+      "linux_dnf": "sudo dnf install hashcat"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  },
+  {
+    "name": "OWASP ZAP CLI",
+    "url": "https://zaproxy.org",
+    "desc": "Automated CLI web application vulnerability scanning wrapper",
+    "cat": "security",
+    "type": "ide",
+    "commands": {
+      "win": "pip install zapcli",
+      "mac": "pip install zapcli",
+      "linux_apt": "pip install zapcli",
+      "linux_pacman": "pip install zapcli",
+      "linux_dnf": "pip install zapcli"
+    },
+    "tier": "open-source",
+    "popularity": "medium"
+  }
+]
