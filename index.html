@@ -455,7 +455,7 @@
 
         .search-box input:focus {
             box-shadow: 0 0 0 3px var(--accent-glow), var(--shadow);
-            border-color: rgba(61, 126, 255, 0.35);
+            border-color: var(--accent);
         }
 
         .si {
@@ -2095,6 +2095,49 @@
             opacity: 1;
             transform: translateX(-50%) translateY(0);
         }
+        /* ── CARD STRIP SHIMMER ── */
+        @keyframes stripShimmer {
+            0%   { background-position: -200% center; }
+            100% { background-position:  200% center; }
+        }
+        .card:hover .card-strip {
+            background-image: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%) !important;
+            background-size: 200% 100%;
+            animation: stripShimmer 1.4s ease-in-out infinite;
+        }
+
+        /* ── BACK TO TOP ── */
+        .back-top {
+            display: none !important;
+            position: fixed;
+            bottom: 28px;
+            left: 28px;
+            z-index: 150;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--glass-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid var(--glass-border);
+            color: var(--accent);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-hover);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(12px);
+            transition: opacity .3s, transform .3s cubic-bezier(.34,1.3,.64,1);
+        }
+        .back-top.visible {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0);
+        }
+        .back-top:hover { transform: translateY(-3px) scale(1.08); }
+        .back-top svg { width: 18px; height: 18px; }
     </style>
 </head>
 
@@ -2403,6 +2446,13 @@
                 </svg>
             </div>
             <div class="sp-divider"></div>
+            <div class="sp-row" style="cursor:pointer;" id="reset-filters-btn">
+                <div class="sp-label"><span>Reset All Filters</span><span>domains, tiers, popularity</span></div>
+                <svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" style="color:var(--muted);">
+                    <path d="M4 4l12 12M16 4L4 16" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <div class="sp-divider"></div>
             <div class="sp-action-row">
                 <button class="sp-action-btn" id="add-fab">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
@@ -2578,7 +2628,17 @@
             </div>
             <div class="detail-body">
                 <div class="detail-desc" id="detail-desc"></div>
-                <div class="detail-url" id="detail-url"></div>
+                <!-- Tier + popularity info row -->
+                <div id="detail-meta-row" style="display:flex;gap:8px;flex-wrap:wrap;margin:-4px 0;">
+                    <span id="detail-tier-badge" style="font-family:'DM Mono',monospace;font-size:0.6rem;font-weight:600;letter-spacing:0.04em;padding:3px 9px;border-radius:20px;text-transform:uppercase;"></span>
+                    <span id="detail-pop-badge" style="font-family:'DM Mono',monospace;font-size:0.6rem;padding:3px 9px;border-radius:20px;background:var(--glass);border:1px solid var(--glass-border);color:var(--muted);"></span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <div class="detail-url" id="detail-url" style="flex:1;"></div>
+                    <button id="detail-copy-url-btn" title="Copy URL" style="width:30px;height:30px;border-radius:8px;border:1.5px solid var(--glass-border);background:var(--glass);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--muted);flex-shrink:0;transition:all .18s;">
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                    </button>
+                </div>
                 <!-- Install section: shown only for IDE tools -->
                 <div class="detail-install-section" id="detail-install-section" style="display:none;">
                     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
@@ -2609,6 +2669,10 @@
                 <button class="pill" id="detail-suggest-btn"
                     style="border:1.5px solid var(--glass-border);background:var(--accent-soft);color:var(--accent);width:auto;padding:0 14px;">✦
                     Similar</button>
+                <button class="pill" id="detail-share-btn"
+                    style="border:1.5px solid var(--glass-border);background:var(--glass);color:var(--text2);width:auto;padding:0 14px;" title="Share this tool">
+                    <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="display:inline-block;vertical-align:middle;margin-right:4px;"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                    Share</button>
                 <a class="visit-btn" id="detail-visit-btn" href="#" target="_blank" rel="noopener">Visit Site ↗</a>
             </div>
         </div>
@@ -2616,6 +2680,13 @@
 
     <!-- TOAST -->
     <div class="toast" id="toast"></div>
+
+    <!-- BACK TO TOP -->
+    <button class="back-top" id="back-top" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <polyline points="18 15 12 9 6 15"/>
+        </svg>
+    </button>
 
     <script>
         /* ══ DATA ══ */
@@ -3097,7 +3168,6 @@
                   <div class="card-footer">
                     <div style="display:flex;align-items:center;gap:5px;">
                       <div class="card-cat-pill">${s.cat}</div>
-                      ${tierBadgeHtml}
                     </div>
                     <div style="display:flex;gap:4px;align-items:center;">
                       ${quickCopyHtml}
@@ -3190,7 +3260,7 @@
         function updateRecentTools(s) {
             recentTools = recentTools.filter(url => url !== s.url);
             recentTools.unshift(s.url);
-            if (recentTools.length > 5) recentTools.pop();
+            if (recentTools.length > 10) recentTools.pop();
             localStorage.setItem('recentTools', JSON.stringify(recentTools));
         }
 
@@ -3283,7 +3353,13 @@
 
             [...grid.querySelectorAll('.card')].forEach(c => c.remove());
 
-            metaEl.textContent = filtered.length + ' ' + (activeTab === 'fav' ? 'favourites' : 'tools');
+            const countLabel = filtered.length + ' ' + (activeTab === 'fav' ? 'favourites' : 'tools');
+            if (typeof animateCount === 'function') {
+                metaEl.textContent = countLabel;
+                animateCount(metaEl, filtered.length);
+            } else {
+                metaEl.textContent = countLabel;
+            }
             badgeAll.textContent = sites.length;
 
             filtered.forEach((s, i) => grid.insertBefore(makeCard(s, i), emptyState));
@@ -3343,9 +3419,23 @@
             }
         });
 
-        /* ══ SORT SELECT ══ */
+        /* ══ SORT SELECT (persistent) ══ */
         const sortSel = document.getElementById('sort-sel');
-        sortSel.addEventListener('change', () => render());
+        const savedSort = localStorage.getItem('sortMode');
+        if (savedSort) sortSel.value = savedSort;
+        sortSel.addEventListener('change', () => { localStorage.setItem('sortMode', sortSel.value); render(); });
+
+        /* ══ RESET ALL FILTERS ══ */
+        document.getElementById('reset-filters-btn').addEventListener('click', () => {
+            appliedDoms.clear(); appliedTiers.clear(); appliedPops.clear();
+            activeCats.clear();
+            [...pillsEl.querySelectorAll('.pill')].forEach(p => p.classList.remove('active'));
+            pillsEl.querySelector('[data-cat="all"]').classList.add('active');
+            updateFilterLbl();
+            closeSP();
+            render();
+            showToast('Filters cleared');
+        });
 
         /* ══ EXPORT FAVOURITES ══ */
         document.getElementById('export-favs-btn').addEventListener('click', () => {
@@ -3459,6 +3549,15 @@
             document.getElementById('detail-desc').textContent = s.desc;
             document.getElementById('detail-url').textContent = s.url;
 
+            // tier + popularity badges
+            const tierClassMap = { 'open-source': 'tier-open-source', 'free': 'tier-free', 'freemium': 'tier-freemium', 'paid': 'tier-paid' };
+            const tierLabelMap = { 'open-source': 'Open Source', 'free': 'Free', 'freemium': 'Freemium', 'paid': 'Paid' };
+            const popEmoji = { high: 'High', medium: 'Medium', low: 'Low' };
+            const dtb = document.getElementById('detail-tier-badge');
+            dtb.textContent = tierLabelMap[s.tier] || s.tier || '';
+            dtb.className = 'card-tier-badge ' + (tierClassMap[s.tier] || 'tier-free');
+            document.getElementById('detail-pop-badge').textContent = 'Popularity: ' + (popEmoji[s.popularity] || s.popularity || 'unknown');
+
             // visit button
             document.getElementById('detail-visit-btn').href = s.url;
             document.getElementById('detail-visit-btn').style.background = color;
@@ -3474,6 +3573,21 @@
             }
 
             detailModal.classList.remove('hidden');
+
+            // copy URL button
+            document.getElementById('detail-copy-url-btn').onclick = () => {
+                navigator.clipboard.writeText(s.url).then(() => showToast('🔗 URL copied!'));
+            };
+
+            // share button
+            document.getElementById('detail-share-btn').onclick = () => {
+                const shareText = `${s.name} — ${s.desc}\n${s.url}`;
+                if (navigator.share) {
+                    navigator.share({ title: s.name, text: s.desc, url: s.url }).catch(() => {});
+                } else {
+                    navigator.clipboard.writeText(shareText).then(() => showToast('📤 Share link copied!'));
+                }
+            };
         }
 
         // Suggest Similar Button — shows similar tools inline inside the detail modal
@@ -3591,6 +3705,39 @@
         // Register Service Worker for PWA
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('sw.js').catch(console.error);
+        }
+
+        /* ══ BACK TO TOP ══ */
+        const backTopBtn = document.getElementById('back-top');
+        window.addEventListener('scroll', () => {
+            backTopBtn.classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+        backTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        /* ══ DYNAMIC THEME COLOR META ══ */
+        function updateThemeColorMeta() {
+            const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg-body').trim();
+            let meta = document.querySelector('meta[name="theme-color"]');
+            if (!meta) { meta = document.createElement('meta'); meta.name = 'theme-color'; document.head.appendChild(meta); }
+            meta.content = bg || '#0e1223';
+        }
+        // Update on theme change
+        const _origApply = applyTheme;
+        // hook into theme changes
+        document.getElementById('theme-chk').addEventListener('change', () => setTimeout(updateThemeColorMeta, 50));
+        document.getElementById('theme-sel').addEventListener('change', () => setTimeout(updateThemeColorMeta, 50));
+        setTimeout(updateThemeColorMeta, 100);
+
+        /* ══ COUNT-UP META ANIMATION ══ */
+        function animateCount(el, target) {
+            const suffix = el.textContent.replace(/\d+/, '').trim();
+            let start = 0;
+            const step = Math.ceil(target / 24);
+            const timer = setInterval(() => {
+                start = Math.min(start + step, target);
+                el.textContent = start + ' ' + suffix;
+                if (start >= target) clearInterval(timer);
+            }, 28);
         }
     </script>
 </body>
