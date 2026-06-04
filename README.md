@@ -50,25 +50,3 @@ Access the live production build here: **[https://sahil002620q.github.io/dev-too
 
 ---
 
-## 📦 Setup & Local Development
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Sahil002620Q/dev-tools.git
-   cd dev-tools
-   ```
-
-2. **Run a local server:**
-   Since the project retrieves tool lists from `tools.json` and uses Service Workers, it must be run on a local HTTP server.
-   
-   Using Node.js (`serve`):
-   ```bash
-   npx serve .
-   ```
-   
-   Using Python:
-   ```bash
-   python -m http.server 8000
-   ```
-
-3. Open **`http://localhost:3000`** (or appropriate port) in your browser.
